@@ -40,7 +40,9 @@ INSTALLED_APPS = [
 
     'main',
     'cash_flow',
-    'selectable_params'
+    'selectable_params',
+
+    'rest_framework'
 ]
 
 MIDDLEWARE = [

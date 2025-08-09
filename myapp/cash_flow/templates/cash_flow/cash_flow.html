@@ -1,0 +1,114 @@
+<!DOCTYPE html><!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+
+<body>
+    <!-- Фильтры -->
+    <div>
+        <label for=""><strong>Фильтрация ДДС</strong></label>
+        <form action="{% url "cash_flow:cash_flow" filter_slug %}" method='get'>
+
+            <div>
+                <label class='form-check-label' for="flexRadioDefault">
+                    По дате выполнения
+                </label>
+                <select name='on_date' id='on_date'>
+                    <option disabled selected>Выберите временной интервал</option>
+                    <option value="today">Сегодня</option>
+                    <option value="last_week">Меньше недели назад</option>
+                    <option value="last_month">Меньше месяца назад</option>
+                    <option value="all_date">Все</option>
+                </select>
+    
+                <div>
+                    <label class='form-check-label' for="flexRadioDefault">
+                        По статусу
+                    </label>
+                    <select name='on_status' id='on_status'>
+                        <option disabled selected>Выберите статус</option>
+                        {% for status in all_statuses %}
+                            <option value="{{status.id}}">{{status}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label class='form-check-label' for="flexRadioDefault">
+                    По типу
+                </label>
+                <select name='on_type' id='on_type'>
+                    <option disabled selected>Выберите тип</option>
+                    {% for type in all_types %}
+                        <option value="{{ type.id }}">{{ type }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div>
+                <label class='form-check-label' for="flexRadioDefault">
+                    По категории
+                </label>
+                <select name='on_category' id='on_category'>
+                    <option disabled selected>Выберите категорию</option>
+                    {% for category in all_categories %}
+                        <option value="{{ category.id }}">{{ category }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div>
+                <label class='form-check-label' for="flexRadioDefault">
+                    По подкатегории
+                </label>
+                <select name='on_subcategory' id='on_subcategory'>
+                    <option disabled selected>Выберите подкатегорию</option>
+                    {% for subcategory in all_subcategories %}
+                        <option value="{{ subcategory.id }}">{{ subcategory }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class='btn btn-primary mx-3 mt-3'>
+                Применить
+            </button>
+
+        </form>
+    </div>
+
+    <div>
+        <a href="{% url 'selectable_params:selectable_params' %}">Перейти к парамметрам ДДС</a>
+    </div>
+    
+    <a href="{% url "cash_flow:create_cash_flow" %}">Создать ДДС</a>
+    <!-- Таблица с ДДС -->
+    <table BORDER=5 width=100%%>
+        <caption><strong>Ваши ДДС</strong></caption>
+        <tr>
+            <th>Дата создания</th>
+            <th>Статус</th>
+            <th>Тип</th>
+            <th>Категория/Подкатегория</th>
+            <th>Сумма</th>
+            <th>Комментарий</th>
+            <th>Действие</th>
+        </tr>
+        {% for cash_flow in all_cash_flow %}
+            <tr>
+                <td>{{ cash_flow.date_creation }}</td>
+                <td>{{ cash_flow.status }}</td>
+                <td>{{ cash_flow.type_operation }}</td>
+                <td>{{ cash_flow.category }}/{{ cash_flow.subcategory }}</td>
+                <td>{{ cash_flow.amount }} р</td>
+                <td>{{ cash_flow.comment }}</td>
+                <td><a href="{% url "cash_flow:change_cash_flow" pk=cash_flow.id %}">Изменить</a> / <a href="{% url "cash_flow:delete_cash_flow" pk=cash_flow.id %}">Удалить</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>

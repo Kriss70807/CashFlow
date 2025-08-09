@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{{ title }}</title>
+</head>
+
+<body>
+    <!-- Ссылки -->
+    <div>
+        <label for=""><strong>Действия</strong></label>
+        <form action="" method='get'>
+            <div class='form-check text-black mx-3'>
+                <div>
+                    <a href="{% url 'cash_flow:cash_flow' filter_slug='all_date' %}">{{ to_cash_flow }}</a>
+                </div>
+                <div>
+                    <a href="{% url 'selectable_params:selectable_params' %}">{{ to_selectable_params }}</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

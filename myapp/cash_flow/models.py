@@ -52,3 +52,6 @@ class Cash_flow(models.Model):
         verbose_name = "Движение денежных средств"
         verbose_name_plural = "Движения денежных средств"
         ordering = ("date_creation",)
+
+    # def __str__(self):
+    #     return f"{self.date_creation.strftime('%d.%m.%Y')}: {self.type_operation_id} {self.amount} р - {self.status_id} ({self.category_id}/{self.subcategory_id})"

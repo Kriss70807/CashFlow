@@ -1,0 +1,107 @@
+<!DOCTYPE html><!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <title>{{ title }}</title>
+    </head>
+    
+<body>
+        <!-- Таблица со статусами ДДС -->
+    <div>
+        <a href="{% url 'cash_flow:cash_flow' filter_slug='all_date' %}">Перейти к ДДС</a>
+    </div>
+    <table BORDER=5>
+        <caption><strong>Ваши статусы ДДС</strong></caption>
+        <tr>
+            <th>Название</th>
+            <th>Действие</th>
+        </tr>
+        {% for status in all_statuses %}
+        <tr>
+            <td>{{ status.name }}</td>
+            <td>
+                <a href="{% url "selectable_params:change_status" pk=status.id %}">Изменить</a>
+                /
+                <a href="{% url "selectable_params:delete_status" pk=status.id %}">Удалить</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url "selectable_params:create_status" %}">Создать новый статус ДДС</a>
+    <p>=====================</p>
+    
+    
+    {% comment %} <a href="{% url ":" %}">Создать тип ДДС</a> {% endcomment %}
+    <table BORDER=5>
+        <caption><strong>Ваши типы ДДС</strong></caption>
+        <tr>
+            <th>Название</th>
+            <th>Действие</th>
+        </tr>
+        {% for type in all_types %}
+        <tr>
+            <td>{{ type.name }}</td>
+            <td>
+                <a href="{% url "selectable_params:change_type" pk=type.id %}">Изменить</a>
+                / 
+                <a href="{% url "selectable_params:delete_type" pk=type.id %}">Удалить</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url "selectable_params:create_type" %}">Создать новый тип ДДС</a>
+    <p>=====================</p>
+    
+    {% comment %} <a href="{% url ":" %}">Создать категорию</a> {% endcomment %}
+    <table BORDER=5>
+        <caption><strong>Ваши категории ДДС</strong></caption>
+        <tr>
+            <th>Название</th>
+            <th>Принадлежит типу</th>
+            <th>Действие</th>
+        </tr>
+        {% for category in all_categories %}
+        <tr>
+            <td>{{ category.name }}</td>
+            <td>{{ category.type_operation }}</td>
+            <td>
+                <a href="{% url "selectable_params:change_category" pk=category.id %}">Изменить</a>
+                / 
+                <a href="{% url "selectable_params:delete_category" pk=category.id %}">Удалить</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url "selectable_params:create_category" %}">Создать новую категорию ДДС</a>
+    <p>=====================</p>
+    
+    {% comment %} <a href="{% url ":" %}">Создать подкатегорию</a> {% endcomment %}
+    <table BORDER=5>
+        <caption><strong>Ваши подкатегории ДДС</strong></caption>
+        <tr>
+            <th>Название</th>
+            <th>Принадлежит категории</th>
+            <th>Действие</th>
+        </tr>
+        {% for category in all_categories %}
+            {% for subcategory in all_subcategories %}
+                {% if category == subcategory.category %}
+                <tr>
+                    <td>{{ subcategory.name }}</td>
+                    <td>{{ category.name }}</td>
+                    <td>
+                        <a href="{% url "selectable_params:change_subcategory" pk=subcategory.id %}">Изменить</a>
+                        / 
+                        <a href="{% url "selectable_params:delete_subcategory" pk=subcategory.id %}">Удалить</a>
+                    </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </table>
+    <a href="{% url "selectable_params:create_subcategory" %}">Создать новую подкатегорию ДДС</a>
+    <p>=====================</p>
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{{ title }}</title>
+    </head>
+
+    <body>
+        <form action="{% url "selectable_params:change_subcategory" pk=cur_subcategory.id %}" method="post">
+            {% csrf_token %}
+            <table BORDER=5>
+                {{ form }}
+            </table>
+            <input type="submit" value="Сохранить">
+        </form>
+        <a href="{% url 'selectable_params:selectable_params' %}">Вернуться к парраметрам ДДС</a>
+    </body>
+</html>
