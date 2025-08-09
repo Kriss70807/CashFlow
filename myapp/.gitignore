@@ -1,12 +1,14 @@
-#python stuff
-venv/
-.pylintrc
+*.log
+*.pot
+*.pyc
 __pycache__/
-
-#ide stuff
-.vscode
-.idea
-
-#django stuff
+local_settings.py
 db.sqlite3
-media/
+media
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
