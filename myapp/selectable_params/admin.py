@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Categories, Statuses, Subcategories, Types_operations
+
+admin.site.register(Categories)
+admin.site.register(Statuses)
+admin.site.register(Subcategories)
+admin.site.register(Types_operations)
